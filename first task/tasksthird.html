@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dynamic List</title>
+</head>
+<body>
+    <h1>Simple Dynamic List</h1>
+    <input type="text" id="itemInput" placeholder="Enter item">
+    <button onclick="addItem()">Add Item</button>
+    <ul id="itemList"></ul>
+
+    <script>
+        function addItem() {
+            const input = document.getElementById('itemInput');
+            const ul = document.getElementById('itemList');
+
+            if (input.value.trim() !== "") {
+                const li = document.createElement('li');
+                li.textContent = input.value;
+                ul.appendChild(li);
+                input.value = ""; 
+                sortList(); 
+            }
+        }
+
+        function sortList() {
+            const ul = document.getElementById('itemList');
+            const items = Array.from(ul.getElementsByTagName('li'));
+
+            items.sort((a, b) => a.textContent.localeCompare(b.textContent));
+
+            ul.innerHTML = ""; 
+            items.forEach(item => ul.appendChild(item)); 
+        }
+    </script>
+</body>
+</html>
